@@ -21,5 +21,3 @@ palavra2 = ""
 #comandos.Buscar(lista_de_linhas, palavra1)
 
 #comandos.Substituir(lista_de_linhas, palavra1, palavra2)
-
-

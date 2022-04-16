@@ -5,6 +5,7 @@ from datetime import datetime
 #Função que recolhe o caminho do arquivo;
 def caminho_arquivo():
     arquivo_txt = False
+    #Tratamento do caso onde o arquivo não é um .txt;
     while arquivo_txt != True:
         caminho_do_arquivo = input()
         if re.search(".txt\Z", caminho_do_arquivo):
@@ -16,6 +17,7 @@ def caminho_arquivo():
 
 #Função que lê o arquivo de texto e retorna as linhas do arquivo em forma de lista;
 def ler_arquivo_texto(arquivo):
+    #Tratamento do caso onde o arquivo não é encontrado;
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
     except FileNotFoundError:
@@ -28,6 +30,7 @@ def ler_arquivo_texto(arquivo):
 
 #Função que lê o arquivo de comandos e retorna os comandos em forma de lista;
 def ler_arquivo_comandos(arquivo):
+    #Tratamento do caso onde o arquivo não é encontrado;
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
     except FileNotFoundError:

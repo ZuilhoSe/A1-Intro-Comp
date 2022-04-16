@@ -13,8 +13,19 @@ def Agrupar(arquivo):
     return texto_editado
 
 def Maior(arquivo):
-    print("Estou vendo o maior")
-    return arquivo
+    #Variável que recebe a maior palavra;
+    maior_palavra = ""
+
+    #Laço que itera sobre as linhas para buscar a maior palavra;
+    for linha in arquivo:
+        palavras = linha.split(" ")
+        for palavra in palavras:
+            if len(palavra) > len( maior_palavra):      
+                 maior_palavra = palavra
+
+    #Resultados da função;            
+    print (maior_palavra)
+    return maior_palavra
     
 def Preguiça(arquivo):
     #Criação da lista que receberá o arquivo editado;

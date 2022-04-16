@@ -9,15 +9,26 @@ def caminho_arquivo():
 
 #Função que lê o arquivo de texto e retorna as linhas do arquivo em forma de lista;
 def ler_arquivo_texto(arquivo):
-    arq = open(arquivo, encoding='utf-8') 
+    try: 
+        arq = open(arquivo, "r", encoding='utf-8') 
+    except FileNotFoundError:
+        print("Arquivo de texto não encontrado. Feche essa janela e rode o app.py novamente.")
+        input("Pressione qualquer tecla pra finalizar.")
+        quit()
+
     linhas = arq.readlines()
     return linhas
 
 #Função que lê o arquivo de comandos e retorna os comandos em forma de lista, todos em letras minúsculas;
 def ler_arquivo_comandos(arquivo):
-    arq = open(arquivo, "r", encoding='utf-8') 
+    try: 
+        arq = open(arquivo, "r", encoding='utf-8') 
+    except FileNotFoundError:
+        print("Arquivo de comandos não encontrado. Feche essa janela e rode o app.py novamente.")
+        input("Pressione qualquer tecla pra finalizar.")
+        quit()
+
     linhas = arq.readlines()
-    
     lista_de_comandos = []
 
     #Aqui temos uma expressão em RegEx para procurar cada um dos comandos no texto. Cada expressão terá um regex próprio;

@@ -26,7 +26,7 @@ def ler_arquivo_texto(arquivo):
     linhas = arq.readlines()
     return linhas
 
-#Função que lê o arquivo de comandos e retorna os comandos em forma de lista, todos em letras minúsculas;
+#Função que lê o arquivo de comandos e retorna os comandos em forma de lista;
 def ler_arquivo_comandos(arquivo):
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
@@ -46,7 +46,7 @@ def ler_arquivo_comandos(arquivo):
 
     return lista_de_comandos
 
-#Função que define a hora quando é chamada;
+#Função que retorna a hora quando é chamada;
 def data_agora():
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -59,7 +59,7 @@ def criar_arquivo_log():
     nome_do_arquivo = "log_" + dt_string
     return nome_do_arquivo
 
-#Função que escreve no arquivo de texto;
+#Função que escreve no arquivo de logs;
 def escrever_log(nome_do_arquivo, resultado, comando, horario):
     log = open(nome_do_arquivo + ".txt", "a", encoding='utf-8')
     log.writelines(str(comando) + " " + str(horario) + "\n")
@@ -67,10 +67,10 @@ def escrever_log(nome_do_arquivo, resultado, comando, horario):
     log.writelines("\n\n\n")
     log.close()
 
-#Função que executa os comandos em ordem;
+#Função que executa os comandos na ordem que aparecem no arquivo;
 def execucao_dos_comandos(arquivo, lista_de_comandos):
     nome_log = criar_arquivo_log()
-    #Executa cada uma das funções na ordem;
+    #Executa cada um dos comandos na ordem;
     for i in range(len(lista_de_comandos)):
         #Caso onde o comando é AGRUPAR;
         if re.search("Agrupar", lista_de_comandos[i]):

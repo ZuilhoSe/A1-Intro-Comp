@@ -1,4 +1,3 @@
-from ctypes.wintypes import PINT
 import comandos
 import re
 from datetime import datetime

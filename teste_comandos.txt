@@ -2,5 +2,5 @@ Preguiça
 Agrupar
 Maior
 Contar Texto
-Substituir Texto Texto
-Buscar Texto
+Substituir Lorem EMAP
+Buscar lorem

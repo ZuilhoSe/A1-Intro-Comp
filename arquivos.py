@@ -66,7 +66,8 @@ def criar_arquivo_log():
 def escrever_log(nome_do_arquivo, resultado, comando, horario):
     log = open(nome_do_arquivo + ".txt", "a", encoding='utf-8')
     log.writelines(str(comando) + " " + str(horario) + "\n")
-    log.writelines(resultado)
+    for linha in resultado:
+        log.writelines(linha)
     log.writelines("\n\n\n")
     log.close()
 
@@ -101,7 +102,7 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
             print("Contar")
             palavra_contada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Contar(arquivo, palavra_contada[1])
+            arquivo_agrupado = comandos.Contar(arquivo, palavra_contada[1])
             escrever_log(nome_log, arquivo_agrupado, f"Contar {palavra_contada[1]}", data_agora())
        
         #Caso onde o comando é BUSCAR;
@@ -109,7 +110,7 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
             print("Buscar")
             palavra_buscada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Buscar(arquivo, palavra_buscada[1])
+            arquivo_agrupado = comandos.Buscar(arquivo, palavra_buscada[1])
             escrever_log(nome_log, arquivo_agrupado, f"Buscar {palavra_buscada[1]}", data_agora())
        
         #Caso onde o comando é SUBSTITUIR;
@@ -117,5 +118,5 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
             print("Substituir")
             palavras = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Substituir(arquivo, palavras[1], palavras[2])
+            arquivo_agrupado = comandos.Substituir(arquivo, palavras[1], palavras[2])
             escrever_log(nome_log, arquivo_agrupado, f"Substituir {palavras[1]} {palavras[2]}", data_agora())

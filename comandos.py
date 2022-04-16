@@ -53,10 +53,51 @@ def Contar(arquivo, texto):
     print("Estou contando", texto)
     return arquivo
 
-def Buscar(arquivo, texto):
-    print("Estou buscando", texto)
-    return arquivo
+def Buscar(arquivo,texto):
+    lista_frase = []
+    for frase in arquivo:
+        if frase.split().count(texto) != 0 :
+            lista_frase.append(frase)
+        elif frase.split().count(texto+".") !=0:
+            lista_frase.append(frase) 
+        elif frase.split().count(frase+",") !=0: 
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"-") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+";") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+":") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"!") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"?") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"@") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"<") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+">") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"@") !=0:
+            lista_frase.append(frase)
+        elif frase.split().count(frase+"<") !=0:
+            lista_frase.append(frase)
+
+
+    print(lista_frase)
+    return lista_frase
 
 def Substituir(arquivo, texto_antigo, texto_novo):
-    print("Estou substituindo", texto_antigo, "por", texto_novo)
-    return arquivo
+    texto_editado = []
+    for frase in arquivo:
+        linha_editada = ""
+        palavras = frase.split(" ")
+        for palavra in palavras:
+            if palavra == texto_antigo:
+                palavra_editada = palavra.replace(f"{texto_antigo}",f"{texto_novo}")
+            else:
+                palavra_editada = palavra    
+            linha_editada = linha_editada + " " + palavra_editada      
+        texto_editado.append(linha_editada)
+    print(texto_editado)
+    return texto_editado

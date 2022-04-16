@@ -20,6 +20,6 @@ palavra2 = ""
 
 #comandos.Contar(lista_de_linhas, palavra1)
 
-#comandos.Buscar(lista_de_linhas, palavra1)
+comandos.Buscar(lista_de_linhas, "lorem")
 
-#comandos.Substituir(lista_de_linhas, palavra1, palavra2)
+#comandos.Substituir(lista_de_linhas, "Lorem", "Ipsum")

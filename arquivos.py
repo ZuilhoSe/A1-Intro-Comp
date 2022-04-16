@@ -1,10 +1,18 @@
+from ctypes.wintypes import PINT
 import comandos
 import re
 from datetime import datetime
 
 #Função que recolhe o caminho do arquivo;
 def caminho_arquivo():
-    caminho_do_arquivo = input()
+    arquivo_txt = False
+    while arquivo_txt != True:
+        caminho_do_arquivo = input()
+        if re.search(".txt\Z", caminho_do_arquivo):
+            arquivo_txt = True
+            print("Arquivo .txt! É válido!")
+        else:
+            print("Não é um .txt! Coloque um arquivo válido!\n")
     return caminho_do_arquivo
 
 #Função que lê o arquivo de texto e retorna as linhas do arquivo em forma de lista;
@@ -12,7 +20,7 @@ def ler_arquivo_texto(arquivo):
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
     except FileNotFoundError:
-        print("Arquivo de texto não encontrado. Feche essa janela e rode o app.py novamente.")
+        print("Arquivo de texto não encontrado. Feche essa janela e rode o app.py com o caminho correto!.")
         input("Pressione qualquer tecla pra finalizar.")
         quit()
 
@@ -24,7 +32,7 @@ def ler_arquivo_comandos(arquivo):
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
     except FileNotFoundError:
-        print("Arquivo de comandos não encontrado. Feche essa janela e rode o app.py novamente.")
+        print("Arquivo de comandos não encontrado. Feche essa janela e rode o app.py com o caminho correto!.")
         input("Pressione qualquer tecla pra finalizar.")
         quit()
 
@@ -89,23 +97,23 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
         #Caso onde o comando é CONTAR;
         elif re.search("Contar", lista_de_comandos[i]):
             print("Contar")
-            x = lista_de_comandos[i].split(" ")
+            palavra_contada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Contar(arquivo, x[1])
-            escrever_log(nome_log, arquivo_agrupado, "Contar", data_agora())
+            comandos.Contar(arquivo, palavra_contada[1])
+            escrever_log(nome_log, arquivo_agrupado, f"Contar {palavra_contada[1]}", data_agora())
        
         #Caso onde o comando é BUSCAR;
         elif re.search("Buscar", lista_de_comandos[i]):
             print("Buscar")
-            x = lista_de_comandos[i].split(" ")
+            palavra_buscada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Buscar(arquivo, x[1])
-            escrever_log(nome_log, arquivo_agrupado, "Buscar", data_agora())
+            comandos.Buscar(arquivo, palavra_buscada[1])
+            escrever_log(nome_log, arquivo_agrupado, f"Buscar {palavra_buscada[1]}", data_agora())
        
         #Caso onde o comando é SUBSTITUIR;
         elif re.search("Substituir", lista_de_comandos[i]):
             print("Substituir")
-            x = lista_de_comandos[i].split(" ")
+            palavras = lista_de_comandos[i].split(" ")
             print("\n\n")
-            comandos.Substituir(arquivo, x[1], x[2])
-            escrever_log(nome_log, arquivo_agrupado, "Substituir", data_agora())
+            comandos.Substituir(arquivo, palavras[1], palavras[2])
+            escrever_log(nome_log, arquivo_agrupado, f"Substituir {palavras[1]} {palavras[2]}", data_agora())

@@ -62,7 +62,7 @@ def criar_arquivo_log():
 
 #Função que escreve no arquivo de texto;
 def escrever_log(nome_do_arquivo, resultado, comando, horario):
-    log = open(nome_do_arquivo, "a", encoding='utf-8')
+    log = open(nome_do_arquivo + ".txt", "a", encoding='utf-8')
     log.writelines(str(comando) + " " + str(horario) + "\n")
     log.writelines(resultado)
     log.writelines("\n\n\n")

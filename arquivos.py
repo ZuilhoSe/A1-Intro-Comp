@@ -31,10 +31,10 @@ def ler_arquivo_comandos(arquivo):
     linhas = arq.readlines()
     lista_de_comandos = []
 
-    #Aqui temos uma expressão em RegEx para procurar cada um dos comandos no texto. Cada expressão terá um regex próprio;
+    #Aqui temos uma expressão em RegEx para procurar cada um dos comandos no texto.
     for i in range(len(linhas)):
-        if re.search("Agrupar\s|Maior\s|Preguiça\s|Contar\s|Buscar\s|Substituir\s", linhas[i]):
-            comandos_por_linha = re.findall("Agrupar\s|Maior\s|Preguiça\s|Contar\s.\w+|Buscar\s.\w+|Substituir\s.\w+\s\w+", linhas[i])
+        if re.search("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s|Buscar\s|Substituir\s", linhas[i]):
+            comandos_por_linha = re.findall("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s.\w+|Buscar\s.\w+|Substituir\s.\w+\s\w+", linhas[i])
             lista_de_comandos.extend(comandos_por_linha)
 
     return lista_de_comandos

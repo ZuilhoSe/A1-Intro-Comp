@@ -8,6 +8,8 @@ lista_de_linhas = arquivos.ler_arquivo_texto("texto.txt")
 palavra1 = ""
 palavra2 = ""
 
+#print(lista_de_comandos)
+
 """"Para utilizar basta descomentar a função que voce quer utilizar"""
 
 #comandos.Agrupar(lista_de_linhas)

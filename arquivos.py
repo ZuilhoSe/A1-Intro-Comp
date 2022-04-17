@@ -21,11 +21,11 @@ def ler_arquivo_texto(arquivo):
     try: 
         arq = open(arquivo, "r", encoding='utf-8') 
     except FileNotFoundError:
-        print("Arquivo de texto não encontrado. Feche essa janela e rode o app.py com o caminho correto!.")
+        print("Arquivo de texto não encontrado. Feche essa janela e rode o app.py com o caminho correto!")
         input("Pressione qualquer tecla pra finalizar.")
         quit()
-
     linhas = arq.readlines()
+
     return linhas
 
 #Função que lê o arquivo de comandos e retorna os comandos em forma de lista;
@@ -37,11 +37,12 @@ def ler_arquivo_comandos(arquivo):
         print("Arquivo de comandos não encontrado. Feche essa janela e rode o app.py com o caminho correto!.")
         input("Pressione qualquer tecla pra finalizar.")
         quit()
-
     linhas = arq.readlines()
+
+    #Lista que recebe os comandos separados;
     lista_de_comandos = []
 
-    #Aqui temos uma expressão em RegEx para procurar cada um dos comandos no texto.
+    #Expressão RegEx para procurar cada um dos comandos no texto;
     for i in range(len(linhas)):
         if re.search("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s|Buscar\s|Substituir\s", linhas[i]):
             comandos_por_linha = re.findall("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s.\w+|Buscar\s.\w+|Substituir\s.\w+\s\w+", linhas[i])
@@ -55,7 +56,7 @@ def data_agora():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     return dt_string	
 
-#Criação do nome do arquivo log que sera editado durante a execução;
+#Criação do nome do arquivo log que sera editado durante a execução do programa;
 def criar_arquivo_log():
     now = datetime.now()
     dt_string = now.strftime("%d-%m-%Y_%H_%M_%S")
@@ -66,13 +67,22 @@ def criar_arquivo_log():
 def escrever_log(nome_do_arquivo, resultado, comando, horario):
     log = open(nome_do_arquivo + ".txt", "a", encoding='utf-8')
     log.writelines(str(comando) + " " + str(horario) + "\n")
-    log.writelines(resultado)
-    log.writelines("\n\n\n")
+    if isinstance(resultado, str):
+        log.writelines(resultado)
+        log.writelines("\n\n\n")
+    else:
+        for linha in resultado:
+            log.writelines(linha)
+            log.writelines("\n")
+        log.writelines("\n\n\n")
+
     log.close()
 
 #Função que executa os comandos na ordem que aparecem no arquivo;
 def execucao_dos_comandos(arquivo, lista_de_comandos):
+    #Arquivo log que será editado no momento;
     nome_log = criar_arquivo_log()
+
     #Executa cada um dos comandos na ordem;
     for i in range(len(lista_de_comandos)):
         #Caso onde o comando é AGRUPAR;
@@ -85,16 +95,16 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
         #Caso onde o comando é MAIOR;
         elif re.search("Maior", lista_de_comandos[i]):
             print("Maior")
-            arquivo_agrupado = comandos.Maior(arquivo)
+            maior_palavra = comandos.Maior(arquivo)
             print("\n\n")
-            escrever_log(nome_log, arquivo_agrupado, "Maior", data_agora())
+            escrever_log(nome_log, maior_palavra, "Maior", data_agora())
         
         #Caso onde o comando é PREGUIÇA;
         elif re.search("Preguiça", lista_de_comandos[i]):
             print("Preguiça")
-            arquivo_agrupado = comandos.Preguiça(arquivo)
+            arquivo_editado = comandos.Preguiça(arquivo)
             print("\n\n")
-            escrever_log(nome_log, arquivo_agrupado, "Preguiça", data_agora())
+            escrever_log(nome_log, arquivo_editado, "Preguiça", data_agora())
        
         #Caso onde o comando é CONTAR;
         elif re.search("Contar", lista_de_comandos[i]):
@@ -109,13 +119,13 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
             print("Buscar")
             palavra_buscada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            arquivo_agrupado = comandos.Buscar(arquivo, palavra_buscada[1])
-            escrever_log(nome_log, arquivo_agrupado, f"Buscar {palavra_buscada[1]}", data_agora())
+            linhas_buscadas = comandos.Buscar(arquivo, palavra_buscada[1])
+            escrever_log(nome_log, linhas_buscadas, f"Buscar {palavra_buscada[1]}", data_agora())
        
         #Caso onde o comando é SUBSTITUIR;
         elif re.search("Substituir", lista_de_comandos[i]):
             print("Substituir")
             palavras = lista_de_comandos[i].split(" ")
             print("\n\n")
-            arquivo_agrupado = comandos.Substituir(arquivo, palavras[1], palavras[2])
-            escrever_log(nome_log, arquivo_agrupado, f"Substituir {palavras[1]} {palavras[2]}", data_agora())
+            arquivo_substituido = comandos.Substituir(arquivo, palavras[1], palavras[2])
+            escrever_log(nome_log, arquivo_substituido, f"Substituir {palavras[1]} {palavras[2]}", data_agora())

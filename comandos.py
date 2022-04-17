@@ -84,7 +84,7 @@ def Substituir(arquivo, texto_antigo, texto_novo):
         linha_editada = ""
         palavras = frase.split(" ")
         for palavra in palavras:
-            if palavra == texto_antigo:
+            if texto_antigo in palavra:
                 palavra_editada = palavra.replace(f"{texto_antigo}",f"{texto_novo}")
             else:
                 palavra_editada = palavra    

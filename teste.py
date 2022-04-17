@@ -12,14 +12,16 @@ palavra2 = ""
 
 """"Para utilizar basta descomentar a função que voce quer utilizar"""
 
-#comandos.Agrupar(lista_de_linhas)
+var = comandos.Agrupar(lista_de_linhas)
+if isinstance(var, str):
+    print("sim")
 
 #comandos.Maior(lista_de_linhas)
 
 #comandos.Preguiça(lista_de_linhas)
 
-comandos.Contar(lista_de_linhas, "lorem")
+#comandos.Contar(lista_de_linhas, palavra1)
 
-#comandos.Buscar(lista_de_linhas, "lorem")
+#comandos.Buscar(lista_de_linhas, palavra1)
 
-#comandos.Substituir(lista_de_linhas, "Lorem", "Ipsum")
+#comandos.Substituir(lista_de_linhas, palavra1, palavra2)

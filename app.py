@@ -1,7 +1,7 @@
 import arquivos
 import interface
 
-#Chamando a interface;
+#Chamando a interface e atribuindo a uma variável para que sejam recolhidos os caminhos dos arquivos;
 arquivos_leitura = interface.criar_interface()
 
 #Atribuindo os arquivos a variaveis para serem utilizados;

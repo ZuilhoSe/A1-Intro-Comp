@@ -49,46 +49,37 @@ def Preguiça(arquivo):
     print(texto_editado)
     return texto_editado
 
-def Contar(arquivo, texto):
-    print("Estou contando", texto)
-    return arquivo
+def Contar(arquivo, palavra):
+    #Variável que recebe a quantidade de vezes que a palavra aparece;
+    vezes_que_a_palavra_aparece = 0
+    
+    #Laço que itera sobre as linha contando as palavras;
+    for linha in arquivo:
+        vezes_que_a_palavra_aparece += linha.count(palavra)
+
+    #Resultados da função;
+    print("Apareceu:", vezes_que_a_palavra_aparece) 
+    return vezes_que_a_palavra_aparece
 
 def Buscar(arquivo,texto):
+    #Lista que recebe as frases que contém o texto;
     lista_frase = []
+
+    #Laço que itera sobre as linhas do arquivo procurando o texto;
     for frase in arquivo:
-        if frase.split().count(texto) != 0 :
-            lista_frase.append(frase)
-        elif frase.split().count(texto+".") !=0:
-            lista_frase.append(frase) 
-        elif frase.split().count(frase+",") !=0: 
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"-") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+";") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+":") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"!") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"?") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"@") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"<") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+">") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"@") !=0:
-            lista_frase.append(frase)
-        elif frase.split().count(frase+"<") !=0:
+        if frase.find(texto) != -1:
             lista_frase.append(frase)
 
-
+    #Resultados da função;
     print(lista_frase)
     return lista_frase
+    
 
 def Substituir(arquivo, texto_antigo, texto_novo):
+    #Lista que recebe o texto editado;
     texto_editado = []
+
+    #Laço que itera sobre as linhas do arquivo substituindo o texto;
     for frase in arquivo:
         linha_editada = ""
         palavras = frase.split(" ")
@@ -99,5 +90,7 @@ def Substituir(arquivo, texto_antigo, texto_novo):
                 palavra_editada = palavra    
             linha_editada = linha_editada + " " + palavra_editada      
         texto_editado.append(linha_editada)
+
+    #Resultados da função;
     print(texto_editado)
     return texto_editado

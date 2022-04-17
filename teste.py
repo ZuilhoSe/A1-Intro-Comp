@@ -18,8 +18,8 @@ palavra2 = ""
 
 #comandos.Preguiça(lista_de_linhas)
 
-#comandos.Contar(lista_de_linhas, palavra1)
+comandos.Contar(lista_de_linhas, "lorem")
 
-comandos.Buscar(lista_de_linhas, "lorem")
+#comandos.Buscar(lista_de_linhas, "lorem")
 
 #comandos.Substituir(lista_de_linhas, "Lorem", "Ipsum")

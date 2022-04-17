@@ -1,6 +1,7 @@
 Preguiça
 Agrupar
 Maior
-Contar Texto
+Contar lorem
 Substituir Lorem EMAP
-Buscar lorem
+Buscar EMAP
+Contar EMAP

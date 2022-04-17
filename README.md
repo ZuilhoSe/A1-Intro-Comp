@@ -13,9 +13,9 @@ O trabalho se divide em 2 partes, com 3 integrantes em cada uma delas:
 ### Parte 2:
 - comandos.py: módulo com a definição das funções que interpretam e executam os comandos de texto;
 
-*obs: O arquivo teste.py permite executar cada comando individualmente e ver o resultado como linha de comando. É uma forma de debugar cada comando.*
-
 ### Arquivos de texto:
 - comandos.txt: comandos em meio a palavras e coisas que não comandos;
 - teste_comandos.txt: comandos puros, um por linha;
 - texto.txt: arquivo de texto sobre o qual os comandos são executados;
+
+*obs: O arquivo teste.py permite executar cada comando individualmente e ver o resultado como linha de comando. É uma forma de debugar cada comando.*

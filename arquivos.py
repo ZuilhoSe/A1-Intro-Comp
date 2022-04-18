@@ -39,16 +39,32 @@ def ler_arquivo_comandos(arquivo):
         quit()
     linhas = arq.readlines()
 
+    #Criação do arquivo que será editado;
+    arquivo_editavel = ""
+    for linha in linhas:
+        arquivo_editavel = arquivo_editavel + linha
+
     #Lista que recebe os comandos separados;
     lista_de_comandos = []
 
     #Expressão RegEx para procurar cada um dos comandos no texto;
-    for i in range(len(linhas)):
-        if re.search("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s|Buscar\s|Substituir\s", linhas[i]):
-            comandos_por_linha = re.findall("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s.\w+|Buscar\s.\w+|Substituir\s.\w+\s\w+", linhas[i])
-            lista_de_comandos.extend(comandos_por_linha)
+    if re.search("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s|Buscar\s|Substituir\s", arquivo_editavel):
+        comandos_por_linha = re.findall("Agrupar\s|Agrupar\Z|Maior\s|Maior\Z|Preguiça\s|Preguiça\Z|Contar\s+.*?(?=\s)|Buscar\s+.*?(?=\s)|Substituir\s+.*?(?=\s)\s*.*?(?=\s)", arquivo_editavel)
+        lista_de_comandos.extend(comandos_por_linha)
 
-    return lista_de_comandos
+    #Tratamento dos comandos para que fiquem com apenas espaços e sem enteres;
+    lista_de_comandos_final = []
+
+    for comando in lista_de_comandos:
+        comando_junto = ""
+        comando_separado = re.split("\s", comando)
+        while "" in comando_separado:
+            comando_separado.remove("")
+        for item in comando_separado:
+            comando_junto = f"{comando_junto} {item}"
+        lista_de_comandos_final.append(comando_junto)
+
+    return lista_de_comandos_final
 
 #Função que retorna a hora quando é chamada;
 def data_agora():
@@ -111,21 +127,21 @@ def execucao_dos_comandos(arquivo, lista_de_comandos):
             print("Contar")
             palavra_contada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            resultado = str(comandos.Contar(arquivo, palavra_contada[1]))
-            escrever_log(nome_log, resultado, f"Contar {palavra_contada[1]}", data_agora())
+            resultado = str(comandos.Contar(arquivo, palavra_contada[2]))
+            escrever_log(nome_log, resultado, f"Contar {palavra_contada[2]}", data_agora())
        
         #Caso onde o comando é BUSCAR;
         elif re.search("Buscar", lista_de_comandos[i]):
             print("Buscar")
             palavra_buscada = lista_de_comandos[i].split(" ")
             print("\n\n")
-            linhas_buscadas = comandos.Buscar(arquivo, palavra_buscada[1])
-            escrever_log(nome_log, linhas_buscadas, f"Buscar {palavra_buscada[1]}", data_agora())
+            linhas_buscadas = comandos.Buscar(arquivo, palavra_buscada[2])
+            escrever_log(nome_log, linhas_buscadas, f"Buscar {palavra_buscada[2]}", data_agora())
        
         #Caso onde o comando é SUBSTITUIR;
         elif re.search("Substituir", lista_de_comandos[i]):
             print("Substituir")
             palavras = lista_de_comandos[i].split(" ")
             print("\n\n")
-            arquivo_substituido = comandos.Substituir(arquivo, palavras[1], palavras[2])
-            escrever_log(nome_log, arquivo_substituido, f"Substituir {palavras[1]} {palavras[2]}", data_agora())
+            arquivo_substituido = comandos.Substituir(arquivo, palavras[2], palavras[3])
+            escrever_log(nome_log, arquivo_substituido, f"Substituir {palavras[2]} {palavras[3]}", data_agora())

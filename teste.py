@@ -12,10 +12,6 @@ palavra2 = ""
 
 """"Para utilizar basta descomentar a função que voce quer utilizar"""
 
-var = comandos.Agrupar(lista_de_linhas)
-if isinstance(var, str):
-    print("sim")
-
 #comandos.Maior(lista_de_linhas)
 
 #comandos.Preguiça(lista_de_linhas)
